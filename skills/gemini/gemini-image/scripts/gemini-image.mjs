@@ -3,9 +3,9 @@
 // Requires Node 18+ (global fetch). Reads GEMINI_API_KEY (or GOOGLE_API_KEY) from env.
 //
 // Usage:
-//   node nanobanana.mjs --prompt "a red fox in snow" --out fox.png
-//   node nanobanana.mjs --prompt "make it night" --input fox.png --out fox-night.png
-//   node nanobanana.mjs --prompt "..." --model gemini-3-pro-image --size 4K --aspect 16:9
+//   node gemini-image.mjs --prompt "a red fox in snow" --out fox.png
+//   node gemini-image.mjs --prompt "make it night" --input fox.png --out fox-night.png
+//   node gemini-image.mjs --prompt "..." --model gemini-3-pro-image --size 4K --aspect 16:9
 //
 // Flags:
 //   --prompt <text>       required
@@ -57,9 +57,8 @@ async function main() {
 
   const key = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
   if (!key) {
-    console.error("ERROR: GEMINI_API_KEY is not set in the environment.");
-    console.error("Get one at https://aistudio.google.com/apikey and set it, e.g. (PowerShell):");
-    console.error('  [Environment]::SetEnvironmentVariable("GEMINI_API_KEY","<key>","User")');
+    console.error("ERROR: GEMINI_API_KEY (or GOOGLE_API_KEY) is not set in the environment.");
+    console.error("Get an API key at https://aistudio.google.com/apikey and set it before running.");
     process.exit(2);
   }
   if (!args.prompt) { console.error("ERROR: --prompt is required."); process.exit(2); }

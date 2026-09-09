@@ -1,28 +1,21 @@
 ---
-name: nano-banana
+name: gemini-image
 description: Generate or edit images with Google's Gemini image models (Nano Banana) via a zero-dependency script. Use whenever the user asks to create, generate, draw, render, illustrate, restyle, upscale, or edit an image, icon, logo, mockup, banner, or photo.
 metadata:
   author: federico-fabiani
   version: "1.0.0"
 ---
 
-# Nano Banana — image generation & editing
+# Gemini Image — image generation & editing
 
 Calls the Gemini REST API directly. No SDK, no install — just Node 18+.
 
-Script: `scripts/nanobanana.mjs`, sitting next to this SKILL.md. Examples below write it as
-`$NB` — substitute the real absolute path to this skill's directory (in Claude Code that's
-normally `~/.claude/skills/nano-banana/scripts/nanobanana.mjs`).
+Script: `scripts/gemini-image.mjs`, sitting next to this SKILL.md. Examples below write it as
+`$GI` — substitute the real absolute path to this skill's directory (in Claude Code that's
+normally `~/.claude/skills/gemini-image/scripts/gemini-image.mjs`).
 
-## 0. Check the API key first
-
-The script reads `GEMINI_API_KEY` (falling back to `GOOGLE_API_KEY`) from the environment.
-If neither is set, the script exits with code 2 and a message. Don't pre-check by echoing the key
-— just run the script and surface its error. If it's missing, tell the user:
-
-> Get a key at https://aistudio.google.com/apikey, then (PowerShell, persists for new sessions):
-> `[Environment]::SetEnvironmentVariable("GEMINI_API_KEY","<key>","User")`
-> For the current session only: `$env:GEMINI_API_KEY="<key>"`
+If the API key is missing, the script exits with a clear error that tells the user to get
+one from Google AI Studio.
 
 Image generation has **no free tier** — every call costs money. See §4.
 
@@ -30,14 +23,14 @@ Image generation has **no free tier** — every call costs money. See §4.
 
 Generate:
 ```bash
-node $NB \
+node $GI \
   --prompt "isometric 3d icon of a coffee machine, soft studio lighting, pastel palette" \
   --out icon.png
 ```
 
 Edit an existing image (pass it as `--input`; the prompt is the edit instruction):
 ```bash
-node $NB \
+node $GI \
   --prompt "remove the background, keep the subject, transparent-looking white backdrop" \
   --input photo.jpg --out photo-clean.png
 ```
